@@ -18,9 +18,6 @@ RUN apt-get update && apt-get install -y \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN wget -O ~/.zshrc http://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
-COPY fancy_vundle_install.sh /
-
 RUN pip install -U distribute \
         setuptools \
         pip
@@ -55,6 +52,13 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 ENTRYPOINT ["/tini", "--"]
 
+# set up zsh config and copy script for vim config
+RUN wget -O ~/.zshrc http://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
+COPY fancy_vundle_install.sh /
+
+# Copy sample notebooks.
+COPY notebooks /notebooks
+COPY clone_ipython_notebooks.sh /notebooks
 
 # tensorboard
 EXPOSE 6006
@@ -65,4 +69,4 @@ EXPOSE 8889
 
 WORKDIR "/notebooks"
 
-CMD ["/bin/bash"]
+CMD ["/bin/zsh"]
