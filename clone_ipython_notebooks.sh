@@ -8,4 +8,4 @@ git clone https://github.com/pkmital/CADL.git
 git clone https://bitbucket.org/hrojas/learn-pandas.git
 git clone https://github.com/jdwittenauer/ipython-notebooks.git
 git clone https://github.com/gumption/Python_for_Data_Science.git
-
+git clone https://github.com/leriomaggio/deep-learning-keras-tensorflow.git

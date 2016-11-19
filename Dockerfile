@@ -30,8 +30,13 @@ RUN pip --no-cache-dir install \
         scipy \
         scikit-image \
         scikit-learn \
+        keras \
         && \
     python3 -m ipykernel.kernelspec
+
+# Jupyter themes
+RUN pip install -U jupyterthemes
+RUN jt -t oceans16 -f roboto -fs 12
 
 COPY jupyter_notebook_config.py /root/.jupyter/
 
@@ -56,6 +61,8 @@ ENTRYPOINT ["/tini", "--"]
 RUN wget -O ~/.zshrc http://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
 COPY fancy_vundle_install.sh /
 
+# Make zsh default
+RUN chsh -s /usr/bin/zsh
 # Copy sample notebooks.
 COPY notebooks /notebooks
 COPY clone_ipython_notebooks.sh /notebooks
@@ -69,4 +76,5 @@ EXPOSE 8889
 
 WORKDIR "/notebooks"
 
-CMD ["/bin/zsh"]
+#CMD ["/bin/zsh"]
+CMD ["/run_jupyter.sh"]
