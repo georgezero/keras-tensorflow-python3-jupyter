@@ -58,6 +58,10 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 ENTRYPOINT ["/tini", "--"]
 
+# add gist button to notebook toolbar
+RUN jupyter nbextension install https://rawgithub.com/minrk/ipython_extensions/master/nbextensions/gist.js
+RUN jupyter nbextension enable gist
+
 # set up zsh config and copy script for vim config
 RUN wget -O ~/.zshrc http://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
 RUN echo "TERM=xterm-256color" >> ~/.zshrc
