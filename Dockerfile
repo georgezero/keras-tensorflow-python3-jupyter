@@ -31,12 +31,13 @@ RUN pip --no-cache-dir install \
         scikit-image \
         scikit-learn \
         keras \
+	xlrd \
         && \
     python3 -m ipykernel.kernelspec
 
 # Jupyter themes
 RUN pip install -U jupyterthemes
-RUN jt -t oceans16 -f roboto -fs 12
+RUN jt -t oceans16 -f roboto -fs 12 -tf roboto -tfs 13 -T
 
 COPY jupyter_notebook_config.py /root/.jupyter/
 
@@ -48,7 +49,7 @@ COPY run_jupyter.sh /
 ENV TENSORFLOW_VERSION 0.11.0rc1
 
 RUN pip --no-cache-dir install \
-        https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.11.0rc1-cp34-cp34m-linux_x86_64.whl
+	https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.0-cp34-cp34m-linux_x86_64.whl
 
 # Something Jupyter suggests to do:
 # http://jupyter-notebook.readthedocs.io/en/latest/public_server.html#docker-cmd
@@ -59,6 +60,7 @@ ENTRYPOINT ["/tini", "--"]
 
 # set up zsh config and copy script for vim config
 RUN wget -O ~/.zshrc http://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
+RUN echo "TERM=xterm-256color" >> ~/.zshrc
 COPY fancy_vundle_install.sh /
 
 # Make zsh default

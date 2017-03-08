@@ -17,13 +17,13 @@ $ docker-machine ip
 This is the virtual machine's IP address, or location on your private network.  NOTE THIS IP ADDRESS!  As we'll need it in a second.  Now run:
 
 ```
-$ docker run -it -p 8888:8888 -p 6006:6006 -v /$(pwd)/tensorflow:/notebooks --name tf georgezero/keras-tensorflow-python3-jupyter
+$ docker run -it -p 8888:8888 -p 6006:6006 -v /$(pwd)/tensorflow:/notebooks -e "PASSWORD=password" --name tf georgezero/keras-tensorflow-python3-jupyter
 ```
 
 On OSX, I discard the "/" just before the $(pwd).  On Windows, make sure to include it!  This command will download everything you need to run Tensorflow on a virtual machine.  If all succeeds, you will have a prompt like this:
 
 ```
-$ docker run -it -p 8888:8888 -p 6006:6006 -v /$(pwd)/tensorflow:/notebooks --name tf georgezero/keras-tensorflow-python3-jupyter
+$ docker run -it -p 8888:8888 -p 6006:6006 -v /$(pwd)/tensorflow:/notebooks -e "PASSWORD=password" --name tf georgezero/keras-tensorflow-python3-jupyter
 Unable to find image 'georgezero/keras-tensorflow-python3-jupyter:latest' locally
 latest: Pulling from georgezero/keras-tensorflow-python3-jupyter
 5c90d4a2d1a8: Pull complete
