@@ -12,7 +12,7 @@ TF 1.1.0
 ### Jupyter 
 
 ```
-docker run -d -p 8888:8888 -p 6006:6006 -e "PASSWORD=password" -v ~/src/ALL_NOTEBOOKS:/notebooks/ALL_NOTEBOOKS --name jupyter --restart always georgezero/rpi-keras-tensorflow-python3-jupyter-pip:latest
+docker run -d -p 8888:8888 -p 6006:6006 -e "PASSWORD=password" -v ~/src/ALL_NOTEBOOKS:/notebooks/ALL_NOTEBOOKS --name jupyter --restart always georgezero/keras-tensorflow-python3-jupyter-pip:latest
 ```
 
 Change `password` to something else
@@ -20,7 +20,7 @@ Change `password` to something else
 ### JupyterLab (Alpha)
 
 ```
-docker run -d -p 8888-8890:8888-8890 -p 6006:6006 -e "PASSWORD=password" -v ~/src/ALL_NOTEBOOKS:/notebooks/ALL_NOTEBOOKS --name jupyterlab --restart always --entrypoint "jupyter" georgezero/rpi-keras-tensorflow-python3-jupyter-pip:latest lab
+docker run -it -p 8888-8890:8888-8890 -p 6006:6006 -e "PASSWORD=password" -v ~/src/ALL_NOTEBOOKS:/notebooks/ALL_NOTEBOOKS --name jupyterlab --restart always --entrypoint "jupyter" georgezero/keras-tensorflow-python3-jupyter-pip:latest lab
 ```
 
 Change `password` to something else
