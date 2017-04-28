@@ -32,6 +32,10 @@ RUN pip --no-cache-dir install \
         scikit-learn \
         keras \
 	xlrd \
+	openpyxl \
+	jupyterlab \
+	nltk \
+	textblob \
         && \
     python3 -m ipykernel.kernelspec
 
@@ -39,21 +43,26 @@ RUN pip --no-cache-dir install \
 RUN pip install -U jupyterthemes
 RUN jt -t oceans16 -f roboto -fs 12 -tf roboto -tfs 13 -T
 
+# Jupyter notebook config to accept password
 COPY jupyter_notebook_config.py /root/.jupyter/
+
+# JupyterLab
+RUN jupyter serverextension enable --py jupyterlab --sys-prefix
 
 # Jupyter has issues with being run directly:
 # https://github.com/ipython/ipython/issues/7062
 # We just add a little wrapper script.
 COPY run_jupyter.sh /
 
-ENV TENSORFLOW_VERSION 0.11.0rc1
+ENV TENSORFLOW_VERSION 1.1.0
 
 RUN pip --no-cache-dir install \
-	https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.0-cp34-cp34m-linux_x86_64.whl
+	https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.1.0-cp34-cp34m-linux_x86_64.whl
+	#https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.0-cp34-cp34m-linux_x86_64.whl
 
 # Something Jupyter suggests to do:
 # http://jupyter-notebook.readthedocs.io/en/latest/public_server.html#docker-cmd
-ENV TINI_VERSION v0.9.0
+ENV TINI_VERSION v0.14.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 ENTRYPOINT ["/tini", "--"]

@@ -1,62 +1,33 @@
-Tensorflow Python3 Jupyter
+Keras Tensorflow Python3 Jupyter JupyterLab
 ==========================
 
-# Docker Toolbox
+## Thanks to pkmital/tensorflow-python3-jupyter 
 
-Docker is a way of launching "virtual" machines on your computer which will aid the creation a machine capable of running tensorflow.  In order to get up to speed with Tensorflow, please install the Docker Toolbox:
+pip3 install everything
 
-https://www.docker.com/products/docker-toolbox
+TF 1.1.0
 
-You'll then need to run the "Docker Quickstart Terminal" which will launch a Terminal environment inside a Virtual Machine running on your computer.  Once the terminal is launched, run the following command:
+## Running
 
-```
-$ cd
-$ docker-machine ip
-```
-
-This is the virtual machine's IP address, or location on your private network.  NOTE THIS IP ADDRESS!  As we'll need it in a second.  Now run:
+### Jupyter 
 
 ```
-$ docker run -it -p 8888:8888 -p 6006:6006 -v /$(pwd)/tensorflow:/notebooks -e "PASSWORD=password" --name tf georgezero/keras-tensorflow-python3-jupyter
+docker run -d -p 8888:8888 -p 6006:6006 -e "PASSWORD=password" -v ~/src/ALL_NOTEBOOKS:/notebooks/ALL_NOTEBOOKS --name jupyter --restart always georgezero/rpi-keras-tensorflow-python3-jupyter-pip:latest
 ```
 
-On OSX, I discard the "/" just before the $(pwd).  On Windows, make sure to include it!  This command will download everything you need to run Tensorflow on a virtual machine.  If all succeeds, you will have a prompt like this:
+Change `password` to something else
+
+### JupyterLab (Alpha)
 
 ```
-$ docker run -it -p 8888:8888 -p 6006:6006 -v /$(pwd)/tensorflow:/notebooks -e "PASSWORD=password" --name tf georgezero/keras-tensorflow-python3-jupyter
-Unable to find image 'georgezero/keras-tensorflow-python3-jupyter:latest' locally
-latest: Pulling from georgezero/keras-tensorflow-python3-jupyter
-5c90d4a2d1a8: Pull complete
-ab30c63719b1: Pull complete
-c6072700a242: Pull complete
-abb742d515b4: Pull complete
-7663bd2e167e: Pull complete
-e0dfa7c8ceb7: Pull complete
-5aec32f9504c: Pull complete
-bf8f259657b7: Pull complete
-97f51c760d42: Pull complete
-88da4ac024f1: Pull complete
-9be9261b300b: Pull complete
-cbefc84e4f35: Pull complete
-17c100eff420: Pull complete
-a56c90619980: Pull complete
-Digest: sha256:01cdde18a2838f819fd72c50fba9837bcde65017bf25261e1c978014c43280e9
-Status: Downloaded newer image for georgezero/keras-tensorflow-python3-jupyter:latest
+docker run -d -p 8888-8890:8888-8890 -p 6006:6006 -e "PASSWORD=password" -v ~/src/ALL_NOTEBOOKS:/notebooks/ALL_NOTEBOOKS --name jupyterlab --restart always --entrypoint "jupyter" georgezero/rpi-keras-tensorflow-python3-jupyter-pip:latest lab
 ```
 
-The next time you want to start this machine, you will launch the docker quickstart terminal and then write:
+Change `password` to something else
 
-```
-$ cd
-$ docker start -i tf
-```
 
-As a result of this, you should have a new folder "tensorflow" inside your Home directory.  Make sure you do everything inside this directory only or else any files you make on your virtual machine WILL BE ERASED once it is shutdown!  In case you did forget this, you can always find your previous docker instance by running:
+### Directories
 
-```
-$ docker ps -a
-CONTAINER ID        IMAGE                                 COMMAND             CREATED             STATUS                       PORTS               NAMES
-182bd64f27d2        some/container   "/bin/bash"         About an hour ago   Exited (130) 6 seconds ago                       tf
-```
+You need to create a directory called `~/src/ALL_NOTEBOOKS` on your local machine.  This is where you should keep all your files, so that even if you stop the Docker container, your files will persist there.
 
-And you can launch this container ID or clone it to retrieve any files you might have forgotten.
+

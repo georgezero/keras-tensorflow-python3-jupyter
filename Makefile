@@ -1,5 +1,5 @@
 IMGNAME = keras-tensorflow-python3-jupyter
-VERSION = 1.0.0 
+VERSION = 1.1.0 
 USER=georgezero
 .PHONY: all build test taglatest  
 
