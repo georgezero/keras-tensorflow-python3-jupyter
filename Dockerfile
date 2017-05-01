@@ -79,7 +79,6 @@ RUN echo "TERM=xterm-256color" >> ~/.zshrc
 RUN chsh -s /usr/bin/zsh
 # Copy sample notebooks.
 COPY notebooks /notebooks
-COPY clone_ipython_notebooks.sh /notebooks
 
 # tensorboard
 EXPOSE 6006
