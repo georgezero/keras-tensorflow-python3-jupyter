@@ -35,6 +35,7 @@ RUN pip --no-cache-dir install \
 	jupyterlab \
 	nltk \
 	textblob \
+	spacy \
         && \
     python3 -m ipykernel.kernelspec
 
