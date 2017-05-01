@@ -73,7 +73,6 @@ RUN jupyter nbextension enable gist
 # set up zsh config and copy script for vim config
 RUN wget -O ~/.zshrc http://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
 RUN echo "TERM=xterm-256color" >> ~/.zshrc
-COPY fancy_vundle_install.sh /
 
 # Make zsh default
 RUN chsh -s /usr/bin/zsh
